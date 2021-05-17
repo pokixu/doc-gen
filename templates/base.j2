@@ -4,18 +4,18 @@
     <link rel="stylesheet" href="{{ site_root }}style.css">
     <link rel="stylesheet" href="{{ site_root }}pygments.css">
     <link rel="shortcut icon" href="{{ site_root }}favicon.ico">
-    <title>mathlib docs: {% block title %}{% endblock %}</title>
+    <title>{% block title %}{% endblock %} - mathlib docs</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{% block metadesc %}The Lean mathematical library, mathlib, is a community-driven effort to build a unified library of mathematics formalized in the Lean proof assistant.{% endblock %}" />
 
-    <meta name="og:title" content="mathlib docs: {{ self.title() }}">
+    <meta name="og:title" content="{{ self.title() }} - mathlib docs">
     <meta name="og:site_name" content="mathlib for Lean - API documentation">
     <meta name="og:description" content="{{ self.metadesc() }}">
     <meta name="og:image" content="{{ site_root }}meta-og.png">
 
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="mathlib docs: {{ self.title() }}">
+    <meta name="twitter:title" content="{{ self.title() }} - mathlib docs">
     <meta name="twitter:description" content="{{ self.metadesc() }}">
     <meta name="twitter:image" content="{{ site_root }}meta-twitter.png">
 </head>
@@ -28,11 +28,106 @@
     <h1><label for="nav_toggle"></label><a href="https://leanprover-community.github.io">mathlib</a>
         <span>documentation</span></h1>
     <p class="header_filename break_within">{% block doctitle %}{{ self.title() }}{% endblock %}</p>
-    <form action="https://google.com/search" method="get" id="search_form">
+    <form id="search_form">
         <input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib_docs">
-        <input type="text" name="q" autocomplete="off">
-        <button>search</button>
+        <input type="text" name="query" autocomplete="off">
+        <button type="button" id="search_filters_btn">Filter</button>
+        <button type="submit">Search</button>
+        <div id="search_results"></div>
     </form>
+    <div id="filters_container">
+        <span class="close" id="close_filters_btn">x</span>
+        <form id="filters_form">
+            <div id="filters_display">
+                <div id="attributes_filter">
+                    Attributes:
+                    <br>
+                    <input type="checkbox" 
+                    name="attribute"
+                    value="simp"
+                    id="simp"
+                    >
+                    <label for="simp">simp</label>
+                    <br>
+                    <input type="checkbox" 
+                    name="attribute"
+                    value="nolint"
+                    id="nolint"
+                    >
+                    <label for="nolint">nolint</label>
+                    <br>
+                    <input type="checkbox" 
+                    name="attribute"
+                    value="ext"
+                    id="ext"
+                    >
+                    <label for="ext">ext</label>
+                    <br>
+                    <input type="checkbox" 
+                    name="attribute"
+                    value="instance"
+                    id="instance"
+                    >
+                    <label for="instance">instance</label>
+                    <br>
+                    <input type="checkbox" 
+                    name="attribute"
+                    value="class"
+                    id="class"
+                    >
+                    <label for="class">class</label>
+                    <br>
+                </div>
+                <div id="kinds_filter">
+                    Kind:
+                    <br>
+                    <input type="checkbox" 
+                    name="kind"
+                    value="structure"
+                    id="structure"
+                    >
+                    <label for="structure">structure</label>
+                    <br>
+                    <input type="checkbox" 
+                    name="kind"
+                    value="theorem"
+                    id="theorem"
+                    >
+                    <label for="theorem">theorem</label>
+                    <br>
+                    <input type="checkbox" 
+                    name="kind"
+                    value="def"
+                    id="def"
+                    >
+                    <label for="def">definition</label>
+                    <br>
+                    <input type="checkbox" 
+                    name="kind"
+                    value="constant"
+                    id="constant"
+                    >
+                    <label for="constant">constant</label>
+                    <br>
+                    <input type="checkbox" 
+                    name="kind"
+                    value="axiom"
+                    id="axiom"
+                    >
+                    <label for="axiom">axiom</label>
+                    <br>
+                    <input type="checkbox" 
+                    name="kind"
+                    value="inductive"
+                    id="inductive"
+                    >
+                    <label for="inductive">inductive</label>
+                    <br>
+                </div>
+            </div>   
+            <button type="submit" id="submit_filters_btn">Submit filters</button>
+        </form>
+    </div>
 </header>
 
 <nav class="internal_nav">{% block internal_nav %}{% endblock %}</nav>
